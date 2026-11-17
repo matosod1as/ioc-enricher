@@ -1,4 +1,5 @@
 # IOC Enricher
+IOC (Indicador de Comprometimento) é um rastro deixado por um ataque, como o IP de origem, um domínio de phishing ou o hash de um arquivo malicioso.
 
 Ferramenta de linha de comando em Python que recebe um IOC (IP, domínio ou hash), identifica o tipo automaticamente, consulta fontes de threat intelligence e devolve um veredito: limpo, suspeito ou malicioso.
 
