@@ -9,10 +9,10 @@ Quando aparece um IP suspeito num log, o analista precisa consultar várias font
 
 ## Como usar
 Crie uma conta gratuita na AbuseIPDB e gere sua chave de API no painel da conta.
-
 ​```bash
 pip install -r requirements.txt
-# crie um arquivo .env com: ABUSEIPDB_KEY=sua_chave
+
+# crie um arquivo .env com: ABUSEIPDB_KEY=sua_chave e VIRUSTOTAL_KEY=sua_chave
 python main.py 8.8.8.8
 ​```
 
@@ -32,6 +32,19 @@ número bruto de denúncias — denúncias podem ser falsas (o 8.8.8.8 acima tem
 | 75–100 | malicioso | alta confiança de abuso                             |
 | 25–74  | suspeito  | sinais relevantes, mas pode ser falso positivo      |
 | 0–24   | limpo     | sem evidência suficiente de abuso                   |
+
+### VirusTotal
+O VirusTotal informa quantos mecanismos (antivírus e scanners) marcaram o item.
+Como o total de mecanismos varia (ex.: 92 para IPs, 74 para arquivos), o veredito
+usa a proporção de votos, e não a contagem bruta — assim um único voto isolado
+não gera alarme (o 8.8.8.8 tem 1 voto em 92 e é legítimo).
+
+| Votos maliciosos            | Veredito     |
+|-----------------------------|--------------|
+| 10% ou mais                 | malicioso    |
+| 3% ou mais (ou suspeitos)   | suspeito     |
+| abaixo de 3%                | limpo        |
+| nenhum mecanismo analisou   | desconhecido |
 
 ## Próximos passos
 - [ ] Integração com VirusTotal (domínios e hashes)
